@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BrushUpUnitTesting
 {
-    class Student
+    public class Student
     {
         private string _name;
         private string _address;
