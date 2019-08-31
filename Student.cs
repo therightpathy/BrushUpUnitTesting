@@ -6,19 +6,29 @@ using System.Threading.Tasks;
 
 namespace BrushUpUnitTesting
 {
+    public enum Gender
+    {
+        Male,
+        Female
+    }
     public class Student
     {
         private string _name;
         private string _address;
         private int _semester;
-        private bool _gender;
+        private Gender _gender;
 
         public string Name { get => _name; set => _name = value; }
         public string Address { get => _address; set => _address = value; }
         public int Semester { get => _semester; set => _semester = value; }
-        public bool Gender { get => _gender; set => _gender = value; }
 
-        public Student(string name, string address, int semester, bool gender)
+        public Gender Gender
+
+        {
+            get => _gender; set => _gender = value;
+        }
+
+        public Student(string name, string address, int semester, Gender gender)
         {
             CheckName(name);
             CheckAddress(address);
@@ -29,13 +39,14 @@ namespace BrushUpUnitTesting
             Gender = gender;
         }
 
-        private static void CheckName(string name)
+        private static bool CheckName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (name.Length < 2)
             {
-                throw new ArgumentException("Name is null or empty");
-
+                throw new ArgumentException("Name is shorter than two characters");
             }
+
+            return true;
         }
 
         private static void CheckAddress(string address)
@@ -48,7 +59,7 @@ namespace BrushUpUnitTesting
 
         public static void CheckSemester(int semester)
         {
-            if (semester < 0)
+            if (semester < 1)
             {
                 throw new ArgumentOutOfRangeException("semester", semester, "Semester must be between 1-8");
             }
